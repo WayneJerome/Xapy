@@ -1,0 +1,257 @@
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.stateIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stateDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.stateLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--mono-font);
+}
+
+/* ─── Status Ring ─── */
+.statusRing {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.ring {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 0deg, transparent, currentColor, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-ring 3s linear infinite;
+}
+
+.ring_running {
+  color: var(--success);
+}
+
+.ring_running::before {
+  background: conic-gradient(from 0deg, transparent 30%, var(--success) 50%, transparent 70%);
+}
+
+.ring_idle {
+  color: var(--text-muted);
+}
+
+.ring_idle::before {
+  background: conic-gradient(from 0deg, transparent 40%, var(--text-muted) 50%, transparent 60%);
+  animation-duration: 6s;
+}
+
+.ring_killed {
+  color: var(--danger);
+}
+
+.ring_killed::before {
+  background: conic-gradient(from 0deg, transparent 20%, var(--danger) 35%, transparent 50%, var(--danger) 65%, transparent 80%);
+  animation-duration: 1.5s;
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ringInner {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ringCore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Buttons ─── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.startBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.startBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.startMode {
+  background: var(--success-dim);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: var(--success);
+}
+
+.startMode:hover:not(:disabled) {
+  background: rgba(34, 197, 94, 0.25);
+  box-shadow: 0 0 25px var(--success-glow);
+}
+
+.stopMode {
+  background: var(--warning-dim);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: var(--warning);
+}
+
+.stopMode:hover:not(:disabled) {
+  background: rgba(245, 158, 11, 0.25);
+  box-shadow: 0 0 25px var(--warning-glow);
+}
+
+.btnIcon {
+  font-size: 10px;
+}
+
+.killBtn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.killBtn:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 25px var(--danger-glow);
+}
+
+.killBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.killConfirm {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: var(--danger) !important;
+  animation: shake 0.5s ease;
+  box-shadow: 0 0 30px var(--danger-glow) !important;
+}
+
+.killActive {
+  background: var(--success-dim) !important;
+  border-color: rgba(34, 197, 94, 0.4) !important;
+  color: var(--success) !important;
+}
+
+.killActive:hover:not(:disabled) {
+  background: rgba(34, 197, 94, 0.2) !important;
+  box-shadow: 0 0 25px var(--success-glow) !important;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.killIcon {
+  font-size: 14px;
+}
+
+/* ─── Kill Banner ─── */
+.killBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--danger-dim);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  font-size: 11px;
+  color: #fca5a5;
+  font-weight: 500;
+  width: 100%;
+  animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

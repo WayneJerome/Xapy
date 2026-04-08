@@ -1,0 +1,364 @@
+/* ─── Header ─── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--mono-font);
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.pulseGreen {
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success-glow);
+}
+
+.pulseRed {
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger-glow);
+}
+
+.pulseGray {
+  background: var(--text-muted);
+  box-shadow: 0 0 4px rgba(100, 116, 139, 0.3);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  70% { box-shadow: 0 0 0 10px transparent; opacity: 0.7; }
+  100% { box-shadow: 0 0 0 0 transparent; opacity: 1; }
+}
+
+/* ─── KPI Grid ─── */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.kpiCard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpiCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.kpiCard:hover::before {
+  opacity: 1;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Main Grid ─── */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.chartArea {
+  min-height: 420px;
+}
+
+.sidePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Bottom Grid ─── */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 360px 1fr 360px;
+  gap: 20px;
+}
+
+.pnlArea {
+  min-height: 0;
+}
+
+/* ─── Log Panel ─── */
+.logPanel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.logCount {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--mono-font);
+}
+
+.logContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.logItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  animation: slideInRight 0.3s ease both;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.logItem:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--glass-border);
+  transform: translateX(2px);
+}
+
+.logDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotGreen {
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success-glow);
+}
+
+.dotRed {
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger-glow);
+}
+
+.logContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logMain {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logAction {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.logSymbol {
+  font-weight: 600;
+  font-family: var(--mono-font);
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+.logMeta {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.logTime {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: var(--mono-font);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ─── Account Panel ─── */
+.accountPanel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.accountList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.accountCard {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.accountCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--glass-border-strong);
+}
+
+.accountTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.accountName {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.accountMeta {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--mono-font);
+}
+
+.brokerBadge {
+  font-size: 9px;
+  background: var(--accent-dim);
+  color: var(--accent-color);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.accountStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.accountStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ─── Empty State ─── */
+.emptyState {
+  color: var(--text-dim);
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1400px) {
+  .kpiGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .bottomGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pnlArea {
+    order: 3;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  .sidePanel {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .kpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+  .sidePanel {
+    flex-direction: column;
+  }
+  .bottomGrid {
+    grid-template-columns: 1fr;
+  }
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
